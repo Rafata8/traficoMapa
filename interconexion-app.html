@@ -1,0 +1,89 @@
+<link rel="import" href="./bower_components/polymer/polymer-element.html">
+<link rel="import" href="/map-component.html">
+<link rel="import" href="/traffic-incidents.html">
+<dom-module id="interconexion-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+
+
+      /* traffic-incidents{
+        height: 500px;
+        overflow-y: scroll;
+      } */
+
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+    <map-component 
+    traffic_info="[[traffic_info]]"
+    radio={{radio}}
+    lat=[[lat]]
+    long=[[long]]
+    radiodib=[[radiodib]]
+    valores={{valores}}
+    city="{{city}}"
+    >
+  </map-component> 
+
+    <traffic-incidents 
+    traffic_info2="{{traffic_info}}"
+    radio=[[radio]]
+    lat={{lat}}
+    long={{long}}
+    radiodib={{radiodib}}
+    valores=[[valores]]
+    _city="[[city]]"
+
+    ></traffic-incidents>
+    
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class InterconexionApp extends Polymer.Element {
+      static get is() { return 'interconexion-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'interconexion-app'
+          },
+          traffic_info: {
+            type: Array,
+            value: function(){return[]},
+            reflectToAttribute: true
+          },
+          radio:{
+            type:Number
+          },
+          radiodib:{
+            type:Number,
+            reflectToAttribute: true
+          },
+          lat:{
+            type:Number
+          },
+          long:{
+            type:Number
+          },
+          valores:{
+            type: Array
+          },
+          city:{
+            type:String,
+            value:''
+          }
+        };
+      }
+    }
+
+    window.customElements.define(InterconexionApp.is, InterconexionApp);
+  </script>
+</dom-module>
