@@ -1,0 +1,135 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/google-map/google-map.html">
+<link rel="import" href="/bower_components/google-map/google-map-search.html">
+<link rel="import" href="/bower_components/plastic-map-info/plastic-map-info.html">
+<link rel="import" href="/bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="/bower_components/paper-radio-group/paper-radio-group.html">
+<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&sensor=false&key=AIzaSyA3lpC78WC-xWGDlrxng8sxF4YLgMllumU"> </script> -->
+<dom-module id="map-component">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .infowindow2 {
+        background-color: black;
+        color: red;
+      }
+
+
+      google-map {
+        height: 500px;
+      }
+    </style>
+
+    <!--<input type="text" value="{{search::input}}" placeholder="Introduzca el lugar">
+
+    <google-map-search map="[[map]]" query="{{search}}" results="{{results}}"></google-map-search>-->
+
+    <!-- <paper-radio-group id="grupo" selected={{radio}}>
+      <paper-radio-button name="10" value="10">10</paper-radio-button>
+      <paper-radio-button name="20" value="20">20</paper-radio-button>
+      <paper-radio-button name="50" value="50">50</paper-radio-button>
+    </paper-radio-group> -->
+
+    <google-map id="map" map="{{map}}" latitude={{latitude}} longitude={{longitude}}
+      api-key="AIzaSyA3lpC78WC-xWGDlrxng8sxF4YLgMllumU" dragEvents=true fit-to-markers>
+      <!--<template is="dom-repeat" items="{{results}}" as="marker">
+        <google-map-marker latitude="[[marker.latitude]]" longitude="[[marker.longitude]]">
+          <h2>{{marker.name}}</h2>
+          <p>{{marker.formatted_address}}</p>
+          <p>Latitude: [[marker.latitude]]</p>
+          <p>Longitude: {{marker.longitude}}</p>
+        </google-map-marker>
+      </template>-->
+
+      <template is="dom-repeat" items="[[traffic_info]]">
+        <google-map-marker latitude="[[item.lat]]" longitude="[[item.lon]]" slot="markers">
+
+
+          <h2>{{item.titulo}}</h2>
+          <p>{{item.descripcion}}</p>
+
+
+        </google-map-marker>
+      </template>
+
+    </google-map>
+
+
+  </template>
+
+  <script>
+    /**
+     * `map-component`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class MapComponent extends Polymer.Element {
+      static get is() { return 'map-component'; }
+      static get properties() {
+        return {
+          latitude: {
+            type: Number,
+            value: '40.405993'
+          },
+          longitude: {
+            type: Number,
+            value: '-3.839583'
+          },
+          traffic_info: {
+            type: Array,
+            value: function () { return [] },
+            reflectToAttribute: true
+          },
+          radio: {
+            type: Number,
+            value: 50
+          },
+
+          _circulo: {
+            type: Object,
+            value: function () { return {} }
+          }
+        };
+      }
+
+      static get observers() {
+        return [
+          'actualizar(traffic_info.splices)'
+        ]
+      }
+
+      actualizar() {
+        // //eliminamos el _circulo anterior
+        if (!(Object.entries(this._circulo).length === 0 && this._circulo.constructor === Object)) {
+          this._circulo.setMap(null);
+        }
+
+        if (this.shadowRoot.querySelector('#map').map) {
+
+          console.log()
+          // Añadimos el nuevo
+          this._circulo = new google.maps.Circle({
+            map: this.shadowRoot.querySelector('#map').map,
+            radius: this.radio * 1000,    // 10 miles in metres
+            fillColor: '#36BAD9',
+            strokeColor: '#7FFF00',
+            strokeWeight: 1,
+            center: new google.maps.LatLng(this.latitude, this.longitude)
+          });
+
+        }
+      }
+
+
+
+    }
+
+    window.customElements.define(MapComponent.is, MapComponent);
+  </script>
+</dom-module>
