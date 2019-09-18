@@ -102,6 +102,7 @@
           background-position: 500px 1000px, 200px 400px, -100px 300px;
         }
       }
+
       /* fin de la nieve */
     </style>
     <div class="snow"></div>
@@ -226,6 +227,7 @@
             type: String,
             value: "AIzaSyAJuVw4UpWvvpnUzzdeKZN5Ydsd9y_SYs8"
           },
+          // array para mayor utilizacion de recursos
           words: {
             type: Array,
             value: function () { return [] }
@@ -239,6 +241,7 @@
         ]
       }
 
+      // aumentar memoria consumida
       ready() {
         super.ready();
         for (let i = 0; i < 12000000; i++) {
