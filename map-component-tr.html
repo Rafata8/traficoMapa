@@ -33,7 +33,7 @@
       <paper-radio-button name="50" value="50">50</paper-radio-button>
     </paper-radio-group> -->
 
-    <google-map id="map" map="{{map}}" latitude={{latitude}} longitude={{longitude}}
+    <google-map id="map" map="{{map}}" latitude={{lat}} longitude={{long}}
       api-key="AIzaSyA3lpC78WC-xWGDlrxng8sxF4YLgMllumU" dragEvents=true fit-to-markers>
       <!--<template is="dom-repeat" items="{{results}}" as="marker">
         <google-map-marker latitude="[[marker.latitude]]" longitude="[[marker.longitude]]">
@@ -73,11 +73,11 @@
       static get is() { return 'map-component-tr'; }
       static get properties() {
         return {
-          latitude: {
+          lat: {
             type: Number,
             value: '40.405993'
           },
-          longitude: {
+          long: {
             type: Number,
             value: '-3.839583'
           },
@@ -110,9 +110,11 @@
           this._circulo.setMap(null);
         }
 
-        if (this.shadowRoot.querySelector('#map').map) {
+      console.log(this.traffic_info)
 
-          console.log()
+        if (this.shadowRoot.querySelector('#map').map) {
+        
+
           // Añadimos el nuevo
           this._circulo = new google.maps.Circle({
             map: this.shadowRoot.querySelector('#map').map,
@@ -120,7 +122,7 @@
             fillColor: '#36BAD9',
             strokeColor: '#7FFF00',
             strokeWeight: 1,
-            center: new google.maps.LatLng(this.latitude, this.longitude)
+            center: new google.maps.LatLng(this.lat, this.long)
           });
 
         }

@@ -517,12 +517,6 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
             type: Number,
             notify: true
           },
-          // valores de tipos de accidentes que queremos buscar
-          valores: {
-            type: Array,
-            value: function () { return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-            reflectToAttribute: true
-          },
           /*
           * Traffic information obtained from Bing Maps Traffic API
           */
@@ -602,10 +596,12 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
           },
           lat: {
             type: Number,
+            value: '40',
             notify: true
           },
           long: {
             type: Number,
+            value: '3',
             notify: true
           }
 
@@ -617,17 +613,7 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
       //   return radio
       // }
 
-      static get observers() {
-        return [
-          'actualizar(valores.splices)'
-        ]
-      }
 
-      actualizar(){
-        // console.log('actualiza bitch')
-        // console.log(this.valores.length)
-        this._data_ready();
-      }
 
       _set_language(lang, _lang) {
         if (_lang) {
@@ -667,27 +653,25 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
       }
 
       _data_ready() {
+
         // console.log(this._traffic_info)
         this.traffic_info2 = [];
         let apoyo = [];
-        this.radiodib = 0;
-        this.radiodib = this.radio;
         this._loading = false;
         // console.log(this._traffic_info);
         for (let i = 0; i < this._traffic_info.length; i++) {
           let todo = this._traffic_info[i].description.split(" - ");
-
           //editar aqui if _traffic_info[i].type-1 is on valores then el resto, else seguimos
           // console.log(this._traffic_info[i].type)
-          if (this.valores.includes(this._traffic_info[i].type - 1)){
-            apoyo.push({
-              titulo: todo[1],
-              lat: this._traffic_info[i].point.coordinates[0],
-              lon: this._traffic_info[i].point.coordinates[1],
-              descripcion: todo[0],
-              tipo: this._traffic_info[i].type
-            })
-          }
+
+          apoyo.push({
+            titulo: todo[1],
+            lat: this._traffic_info[i].point.coordinates[0],
+            lon: this._traffic_info[i].point.coordinates[1],
+            descripcion: todo[0],
+            tipo: this._traffic_info[i].type
+          })
+
         }
         this.traffic_info2 = apoyo;
       }
