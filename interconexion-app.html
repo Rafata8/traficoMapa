@@ -1,5 +1,5 @@
 <link rel="import" href="./bower_components/polymer/polymer-element.html">
-<link rel="import" href="/map-component.html">
+<link rel="import" href="/map-component-tr.html">
 <link rel="import" href="/traffic-incidents.html">
 <dom-module id="interconexion-app">
   <template>
@@ -17,7 +17,7 @@
 
     </style>
     <h2>Hello [[prop1]]!</h2>
-    <map-component 
+    <map-component-tr 
     traffic_info="[[traffic_info]]"
     radio={{radio}}
     lat=[[lat]]
@@ -26,7 +26,7 @@
     valores={{valores}}
     city="{{city}}"
     >
-  </map-component> 
+  </map-component-tr> 
 
     <traffic-incidents 
     traffic_info2="{{traffic_info}}"
@@ -35,7 +35,7 @@
     long={{long}}
     radiodib={{radiodib}}
     valores=[[valores]]
-    _city="[[city]]"
+    city="[[city]]"
 
     ></traffic-incidents>
     

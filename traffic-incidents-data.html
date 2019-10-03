@@ -92,7 +92,7 @@ app_key_traffic="yout_bing_maps_key" auto_refresh refresh_time="60000">
             type: String,
             value: '',
             reflectToAttribute: true,
-            observer: '_cityChanged',
+            observer: 'cityChanged',
             notify: true
           },
           /*
@@ -168,7 +168,7 @@ app_key_traffic="yout_bing_maps_key" auto_refresh refresh_time="60000">
       }
 
       // observer
-      _cityChanged(newValue, oldValue) {
+      cityChanged(newValue, oldValue) {
         if (oldValue !== undefined) {
           this.refreshCity = true;
         }

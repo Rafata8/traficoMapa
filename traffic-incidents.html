@@ -18,11 +18,11 @@ Show a timeline of traffic issues. Its use two api:
 
 - **Google Maps Geocoding API**: to convert any address to geographical coordinates.
 
-- **Bing Maps Traffic API**    : to get information about traffic issues in any _city.
+- **Bing Maps Traffic API**    : to get information about traffic issues in any city.
 
 Example:
 ```
-<traffic-incidents _city="Madrid" _api_key_geocoding="your_google_geocoding_key"
+<traffic-incidents city="Madrid" _api_key_geocoding="your_google_geocoding_key"
 _api_key_traffic="yout_bing_maps_key" _auto_refresh _refresh_time="60000">
 ```
 
@@ -423,20 +423,20 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
 
 
 
-    <traffic-incidents-data id="traffic" city="{{_city}}" api_key_geocoding="{{_api_key_geocoding}}"
+    <traffic-incidents-data id="traffic" city="{{city}}" api_key_geocoding="{{_api_key_geocoding}}"
       app_key_traffic="{{_api_key_traffic}}" auto_refresh="{{_auto_refresh}}" refresh_time="{{_refresh_time}}"
       traffic_info="{{_traffic_info}}" radio="{{radio}}" on-traffic_info-ready="_data_ready"
       on-traffic-request_iniciated="_loading_data" lat="{{lat}}" long="{{long}}"></traffic-incidents-data>
 
-    <!-- <input id="searchBox" placeholder="Search _city" on-blur="blurInput" on-keyup="keyupInput"> -->
+    <!-- <input id="searchBox" placeholder="Search city" on-blur="blurInput" on-keyup="keyupInput"> -->
     <app-toolbar>
 
       <paper-icon-button on-click="refresh" icon="refresh"></paper-icon-button>
-      <div class="b" main-title style="text-transform:capitalize">Traffic Incidents ({{_city}})</div>
+      <div class="b" main-title style="text-transform:capitalize">Traffic Incidents ({{city}})</div>
       <div class="paper-header" _active$="{{_active}}">
         <paper-icon-button icon="search" on-click="toggleInput"></paper-icon-button>
         <div class="input-container">
-          <input id="searchBox" placeholder="Search _city" on-blur="blurInput" on-keyup="keyupInput">
+          <input id="searchBox" placeholder="Search city" on-blur="blurInput" on-keyup="keyupInput">
         </div>
       </div>
     </app-toolbar>
@@ -496,9 +496,9 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
           },
 
           /*
-          * `_city` where you want to obtain traffic information
+          * `city` where you want to obtain traffic information
           */
-          _city: {
+          city: {
             type: String,
             value: "Madrid",
             reflectToAttribute: true,
@@ -506,7 +506,7 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
           },
 
           /*
-          * Radio (Km value) around _city location where traffic information will be searched.
+          * Radio (Km value) around city location where traffic information will be searched.
           */
           radio: {
             type: Number,
@@ -553,7 +553,7 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
             **/
           _no_incidents: {
             type: String,
-            computed: '_emptyIncidents(_language, _city)'
+            computed: '_emptyIncidents(_language, city)'
           },
           /**
             * Set the _language of the component to spanish (es) or english (en)
@@ -634,11 +634,11 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
           return this._lang[lang];
         }
       }
-      _emptyIncidents(_language, _city) {
+      _emptyIncidents(_language, city) {
         if (_language == 'es') {
-          return 'No hemos encontrado incidentes en ' + _city
+          return 'No hemos encontrado incidentes en ' + city
         } else {
-          return 'There are not incidents in ' + _city;
+          return 'There are not incidents in ' + city;
         }
       }
       _checkEmpty(length, loading) {
@@ -715,8 +715,8 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
         if (e.keyCode === 13) {
           // this.lat = 43;
           // this.long = -3;
-          //this._city = "";
-          this._city = this.$.searchBox.value;
+          //this.city = "";
+          this.city = this.$.searchBox.value;
           //this.$.traffic.requestTraffic();
           this.$.searchBox.value = "";
           this.toggleInput();
