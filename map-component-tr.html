@@ -134,7 +134,7 @@
 
     </iron-selector>
 
-    <google-map id="map" map="{{map}}" latitude={{latitude}} longitude={{longitude}}
+    <google-map id="map" map="{{map}}" latitude={{lat}} longitude={{long}}
       api-key="AIzaSyA3lpC78WC-xWGDlrxng8sxF4YLgMllumU" dragEvents=true fit-to-markers>
       <!--<template is="dom-repeat" items="{{results}}" as="marker">
         <google-map-marker latitude="[[marker.latitude]]" longitude="[[marker.longitude]]">
@@ -178,11 +178,11 @@
         return {
           lat: {
             type: Number,
-            value: ''
+            value: '40.2'
           },
           long: {
             type: Number,
-            value: ''
+            value: '-3.7'
           },
           traffic_info: {
             type: Array,
@@ -297,7 +297,7 @@
         this.params = {};
         if (this.api_key_geocoding) {
           this.params.key = this.api_key_geocoding;
-          this.params.latlng = this.latitude + "," + this.longitude;
+          this.params.latlng = this.lat + "," + this.long;
           this.$.buscarCiudad.generateRequest();
         } else {
           console.error('Api key is required');
