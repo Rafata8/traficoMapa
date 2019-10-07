@@ -623,10 +623,12 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
         ]
       }
 
-      actualizar(){
+      actualizar() {
         // console.log('actualiza bitch')
         // console.log(this.valores.length)
-        this._data_ready();
+        if (this.valores != null) {
+          this._data_ready();
+        }
       }
 
       _set_language(lang, _lang) {
@@ -679,7 +681,7 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
 
           //editar aqui if _traffic_info[i].type-1 is on valores then el resto, else seguimos
           // console.log(this._traffic_info[i].type)
-          if (this.valores.includes(this._traffic_info[i].type - 1)){
+          if (this.valores.includes(this._traffic_info[i].type - 1)) {
             apoyo.push({
               titulo: todo[1],
               lat: this._traffic_info[i].point.coordinates[0],
