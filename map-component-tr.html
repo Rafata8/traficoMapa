@@ -53,7 +53,7 @@
 
     </iron-selector>
 
-    <google-map id="map" map="{{map}}" latitude={{lat}} longitude={{long}}
+    <google-map id="map" map="{{map}}" latitude={{_lat}} longitude={{_long}}
       api-key="AIzaSyA3lpC78WC-xWGDlrxng8sxF4YLgMllumU" dragEvents=true fit-to-markers>
       <!--<template is="dom-repeat" items="{{results}}" as="marker">
         <google-map-marker latitude="[[marker.latitude]]" longitude="[[marker.longitude]]">
@@ -145,6 +145,14 @@
           api_key_geocoding: {
             type: String,
             value: "AIzaSyAJuVw4UpWvvpnUzzdeKZN5Ydsd9y_SYs8"
+          },
+          _lat: {
+            type: Number,
+            value: '40.41'
+          },
+          _long: {
+            type: Number,
+            value: '-3.7'
           }
         };
       }
@@ -196,7 +204,7 @@
         this.params = {};
         if (this.api_key_geocoding) {
           this.params.key = this.api_key_geocoding;
-          this.params.latlng = this.lat + "," + this.long;
+          this.params.latlng = this._lat + "," + this._long;
           this.$.buscarCiudad.generateRequest();
         } else {
           console.error('Api key is required');
