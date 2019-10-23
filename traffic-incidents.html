@@ -595,7 +595,7 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
             type: Object,
             computed: '_set_language(_language,_lang)'
           },
-          traffic_info2: {
+          traffic_info: {
             value: function () { return [] },
             type: Array,
             notify: true
@@ -670,7 +670,7 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
 
       _data_ready() {
         // console.log(this._traffic_info)
-        this.traffic_info2 = [];
+        this.traffic_info = [];
         let apoyo = [];
         this.radiodib = 0;
         this.radiodib = this.radio;
@@ -691,7 +691,7 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
             })
           }
         }
-        this.traffic_info2 = apoyo;
+        this.traffic_info = apoyo;
       }
 
       _loading_data() {
