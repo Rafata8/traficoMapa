@@ -513,10 +513,6 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
             reflectToAttribute: true
 
           },
-          radiodib: {
-            type: Number,
-            notify: true
-          },
           /*
           * Traffic information obtained from Bing Maps Traffic API
           */
@@ -589,7 +585,7 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
             type: Object,
             computed: '_set_language(_language,_lang)'
           },
-          traffic_info2: {
+          traffic_info: {
             value: function () { return [] },
             type: Array,
             notify: true
@@ -655,7 +651,7 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
       _data_ready() {
 
         // console.log(this._traffic_info)
-        this.traffic_info2 = [];
+        this.traffic_info = [];
         let apoyo = [];
         this._loading = false;
         // console.log(this._traffic_info);
@@ -673,7 +669,7 @@ where the incident occurs. For more information go to : https://msdn.microsoft.c
           })
 
         }
-        this.traffic_info2 = apoyo;
+        this.traffic_info = apoyo;
       }
 
       _loading_data() {
